@@ -1,1 +1,2 @@
 run = "ligo --help"
+language = "ligo"
