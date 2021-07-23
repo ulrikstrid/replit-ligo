@@ -116,6 +116,10 @@ rec {
       getopt
     ];
 
+    buildInputs = [
+      tezos-protocol-compiler
+    ];
+
     doCheck = false;
   };
 
@@ -481,6 +485,11 @@ rec {
     '';
 
     propagatedBuildInputs = [
+      tezos-base
+      tezos-protocol-environment
+    ];
+
+    buildInputs = [
       tezos-protocol-compiler
     ];
 
