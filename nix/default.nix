@@ -103,6 +103,12 @@ rec {
 
     patches = [ ./remove-problematic-deps.patch ];
 
+    buildPhase = ''
+      runHook preBuild
+      dune build -p ${pname} --verbose ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
+      runHook postBuild
+    '';
+
     propagatedBuildInputs = [
       base
       ligo-simple-utils
