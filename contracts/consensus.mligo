@@ -1,3 +1,7 @@
+(* 
+This file is from https://github.com/marigold-dev/sidechains and has the same license as that repo
+*)
+
 (* store hash *)
 type validator = key
 type validators = validator list

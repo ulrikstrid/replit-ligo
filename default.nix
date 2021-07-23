@@ -1,3 +1,0 @@
-{
-  inherit (callPackage ./nix);
-}
