@@ -1,2 +1,2 @@
 run = "ligo --help"
-language = "ligo"
+language = "nix"
