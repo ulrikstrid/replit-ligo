@@ -1,4 +1,4 @@
-{ pkgs, stdenv, fetchzip, lib, ocamlPackages }:
+{ pkgs ? import <nixpkgs> { }, stdenv, fetchzip, lib, ocamlPackages ? pkgs.ocaml-ng.ocamlPackages_4_10 }:
 
 with ocamlPackages;
 rec {
@@ -98,14 +98,10 @@ rec {
   };
 
   ligo-LexerLib = buildDunePackage rec {
-    pname = "client_utils-008-PtEdo2Zk";
+    pname = "LexerLib";
     inherit (ligo-simple-utils) version src useDune2;
 
-    preBuild = ''
-      rm -rf src
-      ls vendors | grep -v ligo-utils | xargs rm -rf
-      ls vendors/ligo-utils | grep -v client_utils_008_PtEdo2Zk | xargs rm -rf
-    '';
+    patches = [ ./remove-problematic-deps.patch ];
 
     propagatedBuildInputs = [
       tezos-base
@@ -116,6 +112,8 @@ rec {
       tezos-protocol-008-PtEdo2Zk
       tezos-protocol-008-PtEdo2Zk-parameters
       ligo-tezos-memory-proto-alpha
+      bisect_ppx
+      getopt
     ];
 
     doCheck = false;
@@ -123,7 +121,7 @@ rec {
 
   ligo-008-PtEdo2Zk-test-helpers = buildDunePackage rec {
     pname = "ligo-008-PtEdo2Zk-test-helpers";
-    inherit (ligo-simple-utils) version src useDune2 preBuild;
+    inherit (ligo-simple-utils) version src useDune2;
 
     patches = [ ./remove-problematic-deps.patch ];
 
@@ -174,7 +172,9 @@ rec {
 
   ligo-proto-alpha-utils = buildDunePackage rec {
     pname = "proto-alpha-utils";
-    inherit (ligo-simple-utils) version src useDune2 preBuild;
+    inherit (ligo-simple-utils) version src useDune2;
+
+    patches = [ ./remove-problematic-deps.patch ];
 
     propagatedBuildInputs = [
       base
@@ -243,6 +243,7 @@ rec {
       rm -rf src
       ls vendors | grep -v ligo-utils | grep -v ${pname} | xargs rm -rf
       ls vendors/ligo-utils | grep -v ${pname} |xargs rm -rf
+      echo "prebuild done"
     '';
 
     useDune2 = true;
