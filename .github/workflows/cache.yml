@@ -4,7 +4,7 @@ on:
   push:
 jobs:
   linux:
-    name: Test nix-shell and chache on Linux
+    name: Test and chache Linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -19,7 +19,7 @@ jobs:
       - run: nix-shell --run "ligo list-declarations ./contracts/consensus.mligo"
 
   macOS:
-    name: Test nix-shell and chache on macOS
+    name: Test and chache macOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2.3.4
