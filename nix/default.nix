@@ -104,20 +104,11 @@ rec {
     patches = [ ./remove-problematic-deps.patch ];
 
     propagatedBuildInputs = [
-      tezos-base
-      ligo-tezos-utils
-      tezos-stdlib-unix
-      tezos-shell-services
-      tezos-protocol-environment
-      tezos-protocol-008-PtEdo2Zk
-      tezos-protocol-008-PtEdo2Zk-parameters
-      ligo-tezos-memory-proto-alpha
+      base
+      ligo-simple-utils
       bisect_ppx
       getopt
-    ];
-
-    buildInputs = [
-      tezos-protocol-compiler
+      uutf
     ];
 
     doCheck = false;
